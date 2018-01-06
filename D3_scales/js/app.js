@@ -1,6 +1,6 @@
 const data = []
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
   let num = Math.floor(Math.random() * 50)
   data.push(num)
 }
@@ -42,11 +42,11 @@ svg
   .text(d => {
     return d
   })
-  .attr('x', (d, index) => {
-    if (d < 10) {
-      return index * (chart_width / data.length) + 13
-    }
-    return index * (chart_width / data.length) + 9 // 5px between each rectangle
+  .attr('x', (d, i) => {
+    return (
+      i * (chart_width / data.length) +
+      (chart_width / data.length - bar_padding) / 2
+    )
   })
   .attr('y', d => {
     if (d < 5) {
@@ -54,3 +54,10 @@ svg
     }
     return chart_height - d * 5 + 20
   })
+  .attr('fill', d => {
+    if (d < 5) {
+      return 'black'
+    }
+    return '#fff'
+  })
+  .attr('text-anchor', 'middle')
