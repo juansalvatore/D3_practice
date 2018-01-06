@@ -3,8 +3,17 @@ d3.csv('data.csv', (err, data) => {
   if (err) {
     return console.log(err)
   }
-  console.log(data)
-  generate(data.columns)
+  // console.log(data)
+  // generate(data)
+})
+
+// json
+
+d3.json('data.json', (err, data) => {
+  if (err) {
+    return console.log(err)
+  }
+  generate(data)
 })
 
 generate = dataset => {
