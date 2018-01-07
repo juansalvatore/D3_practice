@@ -4,15 +4,18 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Scales</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./styles/style.min.css" />
   </head>
 
   <body>
-    <div id="chart"></div>
     <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="./js/app.js"></script>
+    <script>
+      const slices = [100, 200, 300, 400, 500]
+      let scale = d3.scaleLinear()
+        .domain([d3.min(slices), d3.max(slices)]) // smallest and biggest number in our data
+        .range([10, 350]) // output range (Usually browser size)
+    </script>
   </body>
 
 </html>
