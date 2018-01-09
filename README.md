@@ -1,10 +1,10 @@
 ## D3 practice
 
-* [✓] Understanding SVGs
+* [x] Understanding SVGs
 
-- [✓] D3 fundamentals 
+- [x] D3 fundamentals 
 
-* [✓] Praticing scales 
+* [x] Praticing scales 
 
 - [ ] Animation and interactivity 
 
