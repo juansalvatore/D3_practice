@@ -1,5 +1,7 @@
 ## D3 practice
 
+### Progress
+
 * [x] Understanding SVGs
 
 - [x] D3 fundamentals 
