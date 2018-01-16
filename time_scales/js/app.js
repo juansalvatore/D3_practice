@@ -1,16 +1,25 @@
-let data = [
-  [400, 200],
-  [210, 140],
-  [722, 300],
-  [70, 160],
-  [250, 50],
-  [110, 280],
-  [699, 225],
-  [90, 220],
+const data = [
+  { date: '07/01/2017', num: 20 },
+  { date: '07/02/2017', num: 37 },
+  { date: '07/03/2017', num: 25 },
+  { date: '07/04/2017', num: 45 },
+  { date: '07/05/2017', num: 23 },
+  { date: '07/06/2017', num: 33 },
+  { date: '07/07/2017', num: 49 },
+  { date: '07/08/2017', num: 40 },
+  { date: '07/09/2017', num: 36 },
+  { date: '07/10/2017', num: 27 },
 ]
-let chart_width = 800
+
+let time_parse = d3.timeParse('%m/%d/%Y')
+let time_format = d3.timeFormat('%b %e')
+let chart_width = 1000
 let chart_height = 400
 let padding = 50
+// loop through each date
+data.forEach((e, i) => {
+  data[i].date = time_parse(e.date)
+})
 
 // Create SVG element
 let svg = d3
@@ -21,53 +30,37 @@ let svg = d3
 
 // Create Scales
 let x_scale = d3
-  .scaleLinear()
+  .scaleTime()
   .domain([
-    0,
+    d3.min(data, d => {
+      return d.date
+    }),
     d3.max(data, d => {
-      return d[0]
+      return d.date
     }),
   ])
   .range([padding, chart_width - padding * 2])
 
 let y_scale = d3
-  .scaleLinear()
+  .scaleTime()
   .domain([
     0,
     d3.max(data, d => {
-      return d[1]
+      return d.num
     }),
   ])
   // turn around values to flip canvas
   .range([chart_height - padding, padding])
-
-let r_scale = d3
-  .scaleLinear()
-  .domain([
-    0,
-    d3.max(data, d => {
-      return d[1]
-    }),
-  ])
-  .range([5, 30])
 
 let a_scale = d3
   .scaleSqrt()
   .domain([
     0,
     d3.max(data, d => {
-      return d[1]
+      return d.num
     }),
   ])
   .range([5, 25])
-
-// CREATE AXIS
-let x_axis = d3.axisBottom(x_scale)
-svg
-  .append('g')
-  .attr('class', 'x-axis')
-  .attr('transform', 'translate(0,' + (chart_height - padding) + ')')
-  .call(x_axis)
 
 // Create Circles
 svg
@@ -76,29 +69,28 @@ svg
   .enter()
   .append('circle')
   .attr('cx', d => {
-    return x_scale(d[0])
+    return x_scale(d.date)
   })
   .attr('cy', d => {
-    return y_scale(d[1])
+    return y_scale(d.num)
   })
   .attr('r', d => {
-    return a_scale(d[1])
+    return a_scale(d.num)
   })
   .attr('fill', '#D1AB0E')
 
 // Create Labels
 svg
-  .append('g')
   .selectAll('text')
   .data(data)
   .enter()
   .append('text')
   .text(d => {
-    return d.join(',')
+    return time_format(d.date)
   })
   .attr('x', d => {
-    return x_scale(d[0])
+    return x_scale(d.date)
   })
   .attr('y', d => {
-    return y_scale(d[1])
+    return y_scale(d.num)
   })
