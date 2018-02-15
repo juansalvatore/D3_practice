@@ -1,4 +1,4 @@
-## D3 practice
+## D3 practice from Udemy course "D3js for data visualization" 
 
 ### Progress
 
