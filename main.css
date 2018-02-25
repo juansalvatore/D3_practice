@@ -15,11 +15,15 @@ body {
 }
 
 .cards-container {
-  width: 60%;
+  width: 80%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 .card {
   margin-bottom: 5px;
+}
+
+img {
+  height: 160px;
 }
